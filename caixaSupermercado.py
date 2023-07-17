@@ -57,19 +57,20 @@ if senha == 2987:
     '''
     caixa = float(1280)
     valor = int(0)
-    valorTotal = int(0)
+    valorTotal = float(0)
     valorAnterior = 0
     valorPago = 0
     resposta = "N"
     itens = 1
     troco = 0
-    x = "S"
+    x = "N"
     numeroClientes = 0
 
-    while x == "S":
+    while x == "N":
 
         while resposta == "N":
-                
+            
+            print("(Caso o valor for digitado errado digite -1 para alterar e caso deseje encerrar digite 0)")
             valor = float(input(f"Diga o valor do item {itens}: "))
 
             #resposta = input("Deseja inserir mais algum valor [S/N]").upper()
@@ -89,11 +90,11 @@ if senha == 2987:
             valorTotal += valor
             valorAnterior = valor
         
-        itens = 1
+        #itens = 1
         resposta = "N"
         print(f"\nVenda finalizada com {itens-1} itens.")
         print(f"O valor total foi {valorTotal} R$")
-        valorPago = int(input("Valor pago: "))
+        valorPago = float(input("Valor pago: "))
 
         # PAGAMENTO / PAYMENT
 
@@ -106,6 +107,81 @@ if senha == 2987:
             caixa -= troco
             print(f"\nTroco: {troco:.2f}")
 
+            if troco >= duzentosDisponivel:
 
+                while troco >= 200:
 
+                    duzentosDisponivel -= 1
+                    duzentosUsadas += 1
+                    troco -= 200
 
+                print(f"{duzentosUsadas} notas de 200")
+
+            if troco >= cemDisponivel:
+                    
+                while troco >= 100:
+
+                    cemDisponivel -= 1
+                    cemUsadas += 1
+                    troco -= 100
+
+                print(f"{cemUsadas} notas de 100")
+
+            if troco >= cinquentaDisponivel:
+                    
+                while troco >= 50:
+
+                    cinquentaDisponivel -= 1
+                    cinquentaUsadas =+ 1
+                    troco -= 50
+                    
+                print(f"{cinquentaUsadas} notas de 50")
+
+            if troco >= dezDisponivel:
+
+                while troco >= 10:
+
+                    dezDisponivel -= 1
+                    dezUsadas += 1
+                    troco -= 10
+
+                print(f"{dezUsadas} notas de 10")
+
+            if troco >= cincoDisponivel:
+                    
+                while troco >= 5:
+
+                    cincoDisponivel -= 1
+                    cincoUsadas += 1
+                    troco -= 5
+
+                print(f"{cincoUsadas} notas de 5")
+
+            if troco >= umRealDisponivel:
+                    
+                while troco >= 1:
+
+                    umRealDisponivel -= 1
+                    umRealUsadas += 1
+                    troco -= 1
+
+                print(f"{umRealUsadas} moedas de 1")
+
+            if troco >= cinquentaCentavosDisponivel:
+                    
+                while troco >= 0.5:
+
+                    cinquentaCentavosDisponivel -= 1
+                    cinquentaCentavosUsadas += 1
+                    troco -= 0.5
+
+                print(f"{cinquentaCentavosUsadas} moedas de 0.50")
+
+        numeroClientes += 1
+        valorTotal += valor
+        print()
+        x = input("Deseja fechar o caixa [S/N]: ").upper()
+
+    print(f"\nRestante no caixa R${caixa - valorTotal}")
+    print(f"Numero de clientes atendidos {numeroClientes}")
+    print("Até mais...")
